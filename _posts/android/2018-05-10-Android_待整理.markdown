@@ -1,0 +1,231 @@
+---
+layout:     post
+title:      "Android_待整理"
+date:       2018-05-10
+author:     "Yhyu"
+category:   
+    - android
+tags:   
+    - android
+---
+```
+
+
+JD
+扎实的Java常用技术基础，如：数据结构、集合、多线程、IO等，深刻理解面向对象编程思想
+扎实的Android基础，如：多线程、消息机制、View、事件、动画、适配（机型、SDK、UI）、内存管理、权限管理、HttpApi等
+熟悉主流的开源库，入：SupportLib、OkHttp、Fresco、Glide、EventBus、RxJava、Retrofit、ORM等
+拥有良好的程序架构、模块设计能力，MVC、MVP
+
+1、粗略了解了一下Hashmap原理。码表的作用。
+	http://blog.csdn.net/ghsau/article/details/16843543/
+2、学习AsyncTask源码	线程池、队列、Task、handler、Message等
+
+3、Socket协议。 Socket(stream.flush) 和 ServerSocket(accept)
+
+4、Activity启动模式
+
+5、Handler Message Looper MessageQueue
+
+6、Java的引用类型
+
+7、内存优化相关：检测分析。解决方案。Leakcanary原理？？？？？？？？
+
+8、View绘制优化：分析。减少嵌套。通过theme配置底色 （60fps，每秒60帧，每帧大约16ms）
+
+9、WebView 优化
+	缓存方式：Dom Storage 、Database、App Cache、Indexed Database
+
+	优化方式：资源文件本地化、JS文件本地延时加载、第三方内核（腾讯的X5）、独立进程（进程通信）
+
+	内存优化：通过手动创建对象，使用 application context
+
+10、排序方式 
+	冒泡、选择等 数组和集合排序。DualPivotQuicksort 双轴排序 
+
+
+RN、组件化、Router 、MVP 
+
+
+11、Retrofit 
+	a、1.0~2.0区别
+		1）、接口定义方式不同（callback等）
+		2）、1.0不支持cancel
+		3）、1.0集成依赖gson
+		4）、url定义方式（2.0中baseurl必须/结尾）
+		5)、onRespone出错是否回调，处理body()返回值
+		6)、日志拦截器
+		7）、2.0集成okhttp,1.x可能用ok、androidapacheclient、urlconnecttion
+		8、
+	b、原理
+		1）、注解&动态代理
+		2）、
+---------知乎--------
+12、JVM虚拟机内存管理，垃圾回收策略
+13、深克隆与浅克隆的区别，使用场景
+14、Java6、7、8、9个版本的重要特性
+15、什么叫死锁，出现死锁后如何排查解决
+16、什么叫控制反转和依赖注入？使用场景
+17、列举几个经典的排序算法
+18、View事件传递机制
+WMS Android框架
+Android组件化 跨模块间通信 类加载器
+Android的优化
+图 加载选型 为什么选glide glide的3级缓存
+LRU基本原理 android的绘制机制 android的事件传递机制 android的动画介绍 HashMap 数据结构 jvm 内存模型
+jvm GC模型
+内存的优化 怎样查找泄露 ANR如何处理
+多线程 通信
+讲了讲 handler 源码的理解 :
+threadlocal 如何保证 个线程只有 个looper
+looper looper.prepare做了哪些 作
+messageQueue 做了哪些事情
+idleHandle
+looper如何分发消息
+多个handler 如何保证message正确分发到对应的handler post 的runnable线程在哪调
+等等...
+MVP重构
+设计原则与实践 (6个) 图 的处理
+播
+service如何拉活
+进程间通信 式
+binder 不了解 android serializable parcelable 区别 络库 了哪些 如何进 封装的
+优化 好多 独特的 法 dump 多线程
+组件化 插件化
+类加载
+webview优化 最新的第三 开源项 
+RN
+atlas 等等
+tinker
+java8 Android O glide 4.0 最新的开源技术
+硬件加速对 view的影响 是否 持 耗电量的影响
+ 产者 消费者 线程控制
+handle 消息和线程 观察者
+glide 内存缓存和图 显  eventbus 的内部原理
+线程优化
+进程间通信
+为了解决什么问题 才 这个技术 activity的启动  命周期
+ 法超过65536 后 怎么解决 多dex分包怎么分的
+hashmap和hashtable区别
+讲下 hashmap的数据结构
+linkedlist 和 arraylist 区别 java多线程 android 的线程池 图 加载 lrucache的理解 handler原理
+我讲的glide的缓存机制
+会 gradle 编写插件吗 有了解eventbus的原理吗
+   ( 视频部门  的好好的不知道为何HR没联系我 ) 1 
+hashmap和hashtable区别
+讲下 hashmap的数据结构
+linkedlist 和 arraylist 区别 java多线程 android 的线程池 图 加载 lrucache的理解 handler原理
+我讲的glide的缓存机制
+ 会 gradle 编写插件吗 有了解eventbus的原理吗
+讲下你的项   由发挥啦 解耦 模块化 组件化 MVP
+2 
+没问技术细节 又把项 讲了 遍
+解耦 模块化 组件化 MVP
+———————-
+jj竞技  试题
+java
+集合 hashmap treemap set Arraylist linkedlist 对于什么样的情况选择适当的集合
+多线程 thread  种情况 sleep和wait的区别
+synchronized 静态和 静态的区别 synchronized 传递对象和class的区别
+votalite 的 处 jdk 1.7 虚拟机优化 为了更快速度的赋值 当调  new 创建对象 , 对象还 未创建完成先把地址赋值给了引 
+
+ 所以试  votalite字段的作 是 将cpu中缓存的值 告诉其他寄存器 设计模式 有哪 种
+创建型模式，共五种:   法模式、抽象  模式、单例模式、建造者模式、原型模式。 结构型模式，共七种:适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模 式、享元模式。  为型模式，共  种:策略模式、模板 法模式、观察者模式、迭代 模式、责任链模式、 命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。
+http://www.cnblogs.com/maowang1991/archive/2013/04/15/3023236.html
+内部类和静态内部类的区别 为什么内部类可能造成内存泄露
+因为 内部类如果持有外部类的引  就会造成内存泄露
+为什么静态内部类不会 如果静态内部类持有的更外层的对象引   如静态内部类是 个 死循环 当activity销毁的时候 系统就会判定静态内部类是 个空进程 从 回收掉
+反射 3种原理
+反射回去 某个对象中的字段
+1. //String classPath = "com.whbs.bean.UserBean";
+2. //Class cla = Test1.class.getClassLoader().loadClass(classPath);
+3. //Object ob = cla.newInstance();
+1. Class userCla = (Class) bean.getClass();
+1. Field[] fs = userCla.getDeclaredFields();
+1. Method[] methods = userCla.getMethods();
+android
+handler 为什么容易造成内存泄露
+handler持有activity引  message又持有handler的引  (message.target) , 如果 messageQueue 有message没有处理完成 会造成内存泄露
+同理 只要是内部类持有了外部的引  就容易导致内存泄露 单例也容易内存泄漏
+
+ handler的原理
+activity的跳转
+fragment 的返回栈
+service 中 bind 和  绑定的区别 service  命周期 bind和unbind 进程间通信 aidl
+动画 tween动画 frame动画 property动画 动画如何做到 准确的时间 移动准确的距离
+优化有哪些 内存优化 view优化 怎么检查内存泄露 和 内存溢出
+framekey
+—————
+快 
+1 
+ 我介绍
+项 介绍 mvp
+java基础 hashmap数据结构 就过了
+冒泡 快排的
+2 
+android view 的动画 绘制流程
+静态内部内 和 内部类的区别 多线程 线程间通信
+
+ 内存的模型 : 堆 栈  法区 程序计数器 本地 法栈
+假设 class A class B 其中 B在A   是个静态内部类 这时的java类 创建的时候 是怎样 的?
+类加载
+———-
+阿 巴巴 电话 试
+ 我介绍
+假如框架需要对外进 开放
+mvp + module -> viewobject
+java
+synchronized 和 lock 的区别 synchronized的作 
+handle
+1 如何在 线程中创建looper 2 looper 如何找到对应线程 3 handle 对 线程发送消息
+开放出viewobject 就可以
+多进程访问 sharepreference 怎么解决 多进程同步问题
+进程间通信
+阿 巴巴1 
+1 介绍 作经验
+简历制作的有问题 导致他看了好久没看明  需要重构
+2 介绍项 经验 模块化 组件化 mvp
+looper如何初始化
+
+3 java
+hashmap hashtable 区别
+4 android
+问题: android中你做过哪些优化?
+内存优化 泄露 溢出 view优化 图 的处理啊，布局的处理啊， apk  啊，数据库啊，数据结构啊
+ 络上的优化啊..，缓存啊，dns优化 阿 巴巴 2 
+视频 这块 如何 做到快速播放 ?? 直播优化
+recyclerview 视频 滑动播放 如何处理
+https 和 http 区别 熟悉哪些 络优化  络安全
+cookie 跨域的问题 插件化
+
+
+快手面试
+单链表翻转问题
+IntentFilter
+okhttp 拦截器、缓存问题
+IBinder机制与Messager
+Rxjava，多个并行任务均执行完才执行某个任务
+volailte 原子性
+Handler Looper  ThreadLocal
+post()与postDealy()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```

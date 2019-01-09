@@ -1,0 +1,150 @@
+---
+layout:     post
+title:      "Android_开源"
+date:       2018-05-13
+author:     "Yhyu"
+category:   
+    - android
+tags:   
+    - android
+---
+#### Rxjava
+
+#### Retrofit
+
+#### Okhttp
+
+- 连接池
+
+- OkHttpClient
+
+    - 建造者模式
+
+    - 初始化相关参数，例如：超时时间、重试机制、重定向、认证等等
+
+    - 分发器即执行器Dispatcher：其中包含最大请求书、线程池、等等
+
+- Request创建
+
+    - 通过Request.Builder创建
+
+    - 包含url、参数、请求方式、消息体等
+
+    - 通过okhttpclient.newCall(request)得到一个RealCall对象
+
+- Request执行
+
+    - 通过readCall.enqueue(new callbak)将请求加入到队列，并设置回调监听
+
+    - 实际上市由okhttpclient中的dispatcher执行enqueue（new AsynCall(callback)）
+
+    - 检查当前队列执行状态，将新加入的任务放入执行队列或者缓存队列
+
+    - 通过getResponseWithInterceptorChain()拿到响应进行回调
+
+    - 清理缓存区finished
+
+- 拦截器解析
+
+    - 责任链模式：为请求创建了一个接收者对象的链。这种模式给予请求的类型，对请求的发送者和接收者进行解耦
+
+    - 拦截器 Interceptor
+
+        - 应用拦截器
+
+            - 主要用于查看请求信息及返回信息，如链接地址、头信息、参数信息等
+
+            - 不必担心响应和重定向之间的中间响应
+
+            - 通常只调用一次，即使HTTP响应是通过缓存提供的
+
+            - 遵从应用层的最初目的，与OkHttp的注入头部无关
+
+            - 允许短而且不调用Chain.proceed()
+
+            - 允许重试和多次调用Chain.proceed()
+
+        - 网络拦截器
+
+            - 可以添加、删除或替换请求头信息，还可以改变的请求携带的实体
+
+            - 允许像重定向和重试一样操作中间响应。
+
+            - 防落发生短路时不可调用缓存详情
+
+            - 在数据被传递到网络时观察数据
+
+            - 有权获得装在请求的链接
+
+    - 默认有5个拦截器,通过Interceptro.Chain的子类RealnterceptroChain管理，在RealCall中调用
+
+        - RetryAndFollowUpInteceptor负责失败重连以及重定向的
+
+            - 根据client 、addres、request创建StreamAllocation，它主要用于管理客户端与服务器之间的连接，同时管理连接池，以及请求成功后的连接释放等操作，内部还有RouteSelector等，不同层次处理不同的信息 
+
+            - 内部while(true)循环，处理其他后续拦截器的异常，并不是所有失败都重新连接
+
+            - 通过followUpRequest是否为重定向请求（包含很多响应码：4xx请求错误、3xx重定向错误等），不为null继续请求，为null结束请求
+
+            - 重定向次数限制为20、请求消息体验证（form、multipart、contentType(含json、text等)）
+
+            - 其中还包含很多逻辑处理、异常处理
+
+        - BridgeInterceptor	主要负责构造请求，如请求头，以及构造请求结果和处理如是否有gzip压缩等
+
+            - 将content-type、content-length、encoding等属性从body中取出，添加到requestheader中
+
+            - 默认添加gzip压缩、初期其他头信息
+
+            - 继续分发获取response
+
+            - 处理响应头，例如GZIP解压
+
+        - CacheInterceptor   缓存处理，读取缓存，缓存更新等(POST/PATCH/PUT/DELETE/MOVE并不支持缓存)
+
+            - 通过client设置Cache对象，其中包括文件路径及文件大小
+
+            - 通过DiskLruCache获取缓存的响应
+
+            - 通过CacheStrategry处理是否需要重新请求
+
+            - 继续分发获取response
+
+            - 验证响应更新或者新增缓存
+
+        - ConnectInterceptor 负责和服务器建立连接
+
+            - 通过StreamAllocation.newStream获取一条可用的连接
+
+            - 通过findHealthyConnection获取可用的连接，while（true）
+
+            - 还设计路由、代理、dns、ip、port等等
+
+        - CallServerInterceptor  负责跟服务器交互，发送请求，获取响应
+
+            - 通过HttpCodec编码request和解码response
+
+            - 发送头信息
+
+            - 发送消息体
+
+            - 通过finishRequest将信息flush出去
+
+            - 读取响应信息
+
+            - 处理连接
+
+            - 返回信息
+
+        - RealInterceptorChain：负责执行上面的这些拦截器
+
+    - 自定义拦截器。但是以一定要保证返回正确的Response
+
+    - 最先执行的拦截器，最后执行结束：拦截前->proceed->拦截后
+    ![插图]({{site.url}}/assets/img/android/okhttp拦截器.png)
+
+
+#### 图片 ImageLoader、Glide、Picasso
+#### Dagger
+
+

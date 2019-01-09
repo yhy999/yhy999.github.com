@@ -1,0 +1,38 @@
+---
+layout:     post
+title:      "Android_项目"
+date:       2018-05-15
+author:     "Yhyu"
+category:   
+    - android
+tags:   
+    - android
+---
+
+#### 品推宝
+
+- 项目框架：Okhttp、ImageLoader、EventBus、Fastjson
+
+- 第三方：分享、登录、支付、推送、聊天、图表
+
+- 基类、工具类封装
+
+#### 当当读书
+
+- 4.x
+
+    - 出版未分模块、全fragment技术
+
+- 5.x
+
+    - 组件化
+
+- 阅读部分
+
+    - 内核
+
+    - 上层
+
+#### 当读小说
+
+#### 统一认证

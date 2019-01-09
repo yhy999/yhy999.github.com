@@ -1,0 +1,58 @@
+---
+layout: post
+title: "Android_高阶"
+date: 2018-05-12
+author: "Yhyu"
+category:
+  - android
+tags:
+  - android
+---
+
+#### 内存优化
+
+- 管理分析工具
+
+- 解决方案
+
+- 开源框架分析
+
+- 内存优化策略
+
+  - 在循环内尽量不要使用局部变量
+
+  - 不用的对象即时释放，即指向 NULL
+
+  - 数据库的 cursor 即时关闭。
+
+  - 构造 adapter 时使用缓存 contentview
+
+  - 调用 registerReceiver()后在对应的生命周期方法中调用 unregisterReceiver()
+
+  - 即时关闭 InputStream/OutputStream。
+
+  - android 系统给图片分配的内存只有 8M, 图片尽量使用软引用, 较大图片可通过 BitmapFactory 缩放后再使用,并及时 recycle
+
+  - 尽量避免 static 成员变量引用资源耗费过多的实例。
+
+- 内存泄露
+
+  - 查询数据库没有关闭游标
+
+  - 构造 Adapter 时，没有使用缓存的 convertView
+
+  - Bitmap 对象不在使用时调用 recycle()释放内存
+
+  - 不用的对象没有及时释放对象的引用
+
+#### WebView 优化
+
+- 缓存方式：Dom Storage 、Database、App Cache、Indexed Database
+
+- 优化方式：资源文件本地化、JS 文件本地延时加载、第三方内核（腾讯的 X5）、独立进程（进程通信）
+
+- 内存优化：通过手动创建对象，使用 application context
+
+#### 控制反转与依赖注入
+
+#### 组件化、Router、

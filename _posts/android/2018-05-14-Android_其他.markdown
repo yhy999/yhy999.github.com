@@ -1,0 +1,45 @@
+---
+layout:     post
+title:      "Android_其他"
+date:       2018-05-14
+author:     "Yhyu"
+category:   
+    - android
+tags:   
+    - android
+---
+
+#### APK打包过程
+![插图]({{site.url}}/assets/img/android/apk打包过程.png)
+
+- 通过aapt打包res资源文件，生成R.java、resource.arsc和res文件
+
+- 处理aidl文件，生成相应的java接口文件
+
+- 编译所有的java文件，生成class文件
+
+- 通过dex命令，将所有的class文件打包成classes.dex
+
+- 通过apkbuilder工具，将上述文件一起打包成apk
+
+- 通过jarsigner对apk进行签名
+
+- 通过zipalign工具进行对齐处理
+
+#### reactnative
+
+#### https
+
+#### gradle构建过程及相关知识
+
+#### 安装包大小优化  lint  插件优化
+
+#### OnLowMemory、OnTrimMemory
+
+#### inflate执行过程
+
+#### handler  mainThread  localThread
+
+#### keep-alive作用
+
+#### 其他 AMS

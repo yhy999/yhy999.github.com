@@ -1,0 +1,69 @@
+---
+layout: post
+title: "Android_基础"
+date: 2018-05-11
+author: "Yhyu"
+category:
+  - android
+tags:
+  - android
+---
+
+#### Android 四大组件
+
+- Activity
+  生命周期函数。
+  启动模式：Standard、SingleTop(栈顶、onNewIntent())、SingleTask、SingleInstance
+
+- Service
+- ContentProvider
+- BroadcastReceiver
+
+#### 常用布局
+
+#### AsyncTask、Thread、
+
+#### Handler、Message、MessageQueue、Looper
+
+- 消息机制
+  - 通过 Handler 将 Message 发送到 MessageQueue 中进行存储
+  - MessageQueue 通过单链表存储 Message 对象，保存阻塞、唤醒等逻辑
+  - Looper 在 loop(）方法中，通过死循环，不断的调用 MessageQueue.next()
+  - Looper 拿到 Message 后，通过调用 Message.tagert.dispatchMessage 发送
+- Message
+  - what、target（handler 本身）、callback（runnable 对象） 、next（下一个 Message）
+  - dispatchMessage（message.callback.run()>tagert.callback.handleMessage()>target.handleMessage()）
+  - 对象重用，避免 GC 频繁。Message 用完后，回调用 recyle 及 recycleUnchecked 处理后，保存给 sPoll(在此之前还要将 sPool 赋值给 next)，通过 sPoolSize 控制链表长度。通过 Message.obtain 获取新的消息对象
+- MessageQueue
+  - mMessage(最近一个要处理的消息)
+- Looper
+  - 与线程一一对应
+  - 主线程默认已绑定，在 ActivityThread 的 main 方法中初始化
+  - 子线程需要手动调用 Looper.prepare()-->创建 Hander 对象-->Looper.loop()开启轮询
+  - Looper.prepare()创建 Looper 对象，并保存在 ThreadLocal 中，只能调用一次。（第二次保存）
+- Handler
+- delay 消息机制
+  - postDelay->sendMessageDelayed->sendMessageAtTime->enqueueMessage（handler）
+  - MessageQueue.enqueueMessage()，队列结构为链表结构，按执行的绝对时间排序，根据不同消息可手动唤醒队列，
+  - MessageQueue.next()，由 Looper 循环调用，但是此方法为可能阻塞，根据链表头消息执行时间，确定是否阻塞或下次唤醒时间
+- 内存泄露
+  - 原因：通过内部类创建 Handler 对象，会隐式的持有 activity 的引用，而 looper、messagequeue 与主线程绑定，其中 message.target 就是 handler 对象，所以 activity 一直被持有，当 activity 关闭后，但 handler 有未处理的消息时，就会导致 activity 一直无法释放，造成内存泄露
+  - 解决：a、通过 weak 在 handler 中持有 activity b、在 ondestroy 中移除所有的 message
+
+#### View 绘制流程、过渡绘制、绘制优化
+
+#### Touch 事件传递过程
+
+#### 进程优先级
+
+- Foreground process 前台进程 定义：就是用户可以看到的，优先级是最高的，即便是在内存不足的时候，系统也不会去杀死这个进程
+- Visible process 可见进程 如果内存不足，会把比可见进程优先级低的进程给杀死
+- Service process 如果一个程序只有一个后台的服务
+- Background process 没有服务的进程 ,并且我们用户看不见这个进程
+- Empty process 没有任何活动组件的进程.为了在使用这个进程的时候，能够更快的创建出来，所以默认情况不会杀死一个进程，那么这个进程就是一个 empty 的进程。
+
+#### JNI 开发流程
+
+#### SurfaceView
+
+- SurfaceView 与 View 最本质的区别在于：surfaceView 它是在一个新起的单独线程中重新绘制画面而 View 必须在 UI 的主线程中更新画面。那么在 UI 的主线程中更新画面，可能会引发问题，比如你更新画面的时间过长，那么你的主 UI 线程会被你正在画的函数阻塞。那么将无法响应输入的请求，将会导致引发 ANR 异常！当使用 surfaceView 由于是在新的线程中更新画面所以不会阻塞你的 UI 主线程。但这也带来了另外一个问题，就是事件同步。比如你触屏了一下，你需要 surfaceView 中 thread 处理，一般就需要有一个 event queue 的设计来保存 touch event，这会稍稍复杂一点，因为涉及到线程同步。
