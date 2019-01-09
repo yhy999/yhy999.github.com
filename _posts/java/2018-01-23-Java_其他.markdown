@@ -1,0 +1,35 @@
+---
+layout:     post
+title:      "Java_其他"
+date:       2018-01-23
+author:     "Yhyu"
+category:   
+    - java
+tags:   
+    - java
+---
++ 经典排序算法（选择、冒泡、快速、DualPivotQuicksort 双轴排序 等）
+
++ 字符相关的知识
+
++ char型变量中能不能存贮一个中文汉字?为什么? char型变量是用来存储Unicode编码的字符的，unicode编码字符集中包含了汉字，所以，char型变量中当		   然可以存储汉字啦。不过，如果某个特殊的汉字没有被包含在unicode编码字符集中，那么，这个char型变量中就不能存储这个特殊汉字。补充说明：unicode编码占用两个字节，所以，char类型的变量也是占用两个字节。备注：后面一部分回答虽然不是在正面回答题目，但是，为了展现自己的学识和表现自己对问题理解的透彻深入，可以回答一些相关的知识，做到知无不言，言无不尽。
+
++ 动态代理
+    + AOP切换编程。
+    + 动态代理实现步骤
+    + 必备条件有统一实现的接口+已知子类
+    + 继承InvocationHandler，使用成员变量保存被代理的对象，实现invoke方法中，通过反射调用method，可在调用前后实现逻辑
+    + 使用动态代理
+
+    ```java
+    UserService userService = new UserServiceImpl();    
+    //创建一个InvocationHandler，描述我们希望代理者执行哪些操作  
+    InvocationHandler invocationHandler = new MyInvocationHandler(userService);   
+    //通过刚才创建的InvocationHandler，创建真正的代理者。第一个参数是类加载器，
+    // 第二个参数是这个代理者实现哪些接口(与被代理者实现的是相同的接口)  
+    UserService userServiceProxy = (UserService)Proxy.newProxyInstance(
+            userService.getClass().getClassLoader(),    
+            userService.getClass().getInterfaces(), invocationHandler);    
+    System.out.println(userServiceProxy.getName(1));    
+    System.out.println(userServiceProxy.getAge(1)); 
+    ```

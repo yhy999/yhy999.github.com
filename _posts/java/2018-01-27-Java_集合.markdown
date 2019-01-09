@@ -1,0 +1,81 @@
+---
+layout:     post
+title:      "Java_集合"
+date:       2018-01-27
+author:     "Yhyu"
+category:   
+    - java
+tags:   
+    - java
+---
+### 集合概述
++ 存储对象，相对于数据更加灵活
++ Collection接口：
+    + List接口：集合元素有索引、有序、可以重复、可以为null
+       +  ArrayList：底层为数组结构；有索引查询快、增删慢；线程不安全；默认长度为10、50%延长
+       +  LinkedList：底层为链表；无索引查询慢、增删快；线程不同步
+       +  Vector：底层为数组结构；查询增删都慢；线程安全；默认长度为10、100%延长
+            + Stack栈继承与Vector，先进先出
+    + Set接口：集合元素无索引、不可重复
+        + HashSet：底层为哈希表；无序；存取快；线程不同步；
+            + 唯一性原理（hashCode-equals）
+        + TreeSet：底层为二叉树，该二叉树又称红黑树；有序；线程不同步
+            + 唯一性、有序性：自然排序、通过实现Comparator或Compareable接口的compareTo方法
+    + Queue接口：队列；先进先出;其中LinkedList也实现了这个接口
+        + 关键方法：offer添加、poll获取并移除
+        + PriorityQueue，实现优先级的队列
+        + Deque：双端队列，堆栈、队列通吃
+        + ArrayDeque：基于数组的双端队列
+        + LinkedList：双链表
+        + 其他子类：AbstractQueue, ArrayBlockingQueue, ConcurrentLinkedQueue, LinkedBlockingQueue, DelayQueue, LinkedList, PriorityBlockingQueue, PriorityQueue和ArrayDqueue。
++ Map接口：键值对形式
+    + HashMap：底层哈希表；键值不能为null；线程不安全；唯一性（hashCode-equals）
+    + TreeMap：底层为二叉树；与TreeSet类似。
+    + HashTable：底层为哈希表；键值可为null；线程安全；唯一性、有序性
++ HashMap和HashTable
+    + 相同点：底层实现都是数组+链表结构
+    + 不同点
+        + 线程是否安全，前者不安全，后者安全
+        + 元素是否可为null，前者可以，后者不可以
+        + hash的计算方法不同，前者对hashCode进行二次哈希再对table长度取模；后者直接使用hashCode对table长度取模
+        + 初始容量不同，前者16后者11，填充因子默认为0.75
+    + 实现原理
+        + HashMap和Hashtable的底层实现都是数组+链表结构实现的，这点上完全一致；添加、删除、获取元素时都是先计算key的hash，然后通过hash与table数组的length取模，算出table数组的下标index，然后进行相应再操作；
+        + put方法：HashMap会对null值key进行特殊处理，总是放到table[0]位置，put过程是先计算key的hash，然后通过hash与table数组的length取模，算出table数组的下标index，然后将key放到table[index]位置，当table[index]已存在其它元素时，会在table[index]位置形成一个链表，将新添加的元素放在table[index]，原来的元素通过Entry的next进行链接，这样以链表形式解决hash冲突问题，当元素数量达到临界值(capactiy*factor)时，则进行扩容；
+        + get方法：同样当key为null时会进行特殊处理，在table[0]的链表上查找key为null的元素，get的过程也是先计算key的hash，然后通过hash与table数组的length取模，算出table数组的下标index，然后遍历table[index]上的链表，直到找到key，然后返回；
+        + remove方法：remove方法和put、get类似，计算hash，计算index，然后遍历链表，将找到的元素从table[index]链表移除；
+        + clear()方法：clear方法非常简单，就是遍历table数组，然后把每个位置置为null，同时修改元素个数为0；需要注意的是clear方法只会清除里面的元素，并不会重置capactiy；
+        + containsKey方法：是先计算key的hash，然后通过hash与table数组的length取模，算出table数组的下标index，遍历table[index]元素查找是否包含key相同的值；	
+        + containsValue方法就比较粗暴了，就是直接遍历所有元素直到找到value，由此可见HashMap的containsValue方法本质上和普通数组和list的contains方法没什么区别，你别指望它会像containsKey那么高效；
+    + hash冲突及处理方法
+        + hash冲突：就是根据key经过一个函数得到的结果作为地址去存放当前的key-value键值对时，却发现算出来的地址上已经存放其他元素了；
+        + hash冲突处理：
+            + 通过构造性能良好的哈希函数，可以减少hash冲突，但一般不能完全避免冲突。
+            + 再散列法：基本思想是当key的哈希地址p出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1还冲突，继续以p为基础，产生另一个哈希地址，如此重复，直到找到一个不冲突的哈希地址；
+               + 线性探测再散列
+               + 二次探测再散列
+              + 伪随机探测再散列
+            + 再哈希法：基本思想是同时构造多个不同的哈希函数；
+            + 链地址法：基本思想是将所有哈希地址为i的元素构造一个称为同义词链的单链表；HashMap解决哈希冲突就是通过链地址法。
+            + 建立公共溢出区：基本思想是将哈希表分为基本表和溢出表两部分，凡是和基本表发生冲突的元素，一律填入溢出表；
++ HashSet、HashMap : HashSet内部就是使用HashMap实现，只不过HashSet里面的HashMap所有的value都是同一个Object而已，
+		因此HashSet也是非线程安全，所以HashSet是个简化的HashMap
+### Map集合同步问题
++ 多线程环境下，使用Hashmap进行put操作会引起死循环，所以在并发情况下不能使用HashMap；HashTable容器使用synchronized来保证线程安全，但在线程竞争激烈的情况下HashTable的效率非常低下；
++ Collections.synchronizedMap()和Hashtable一样，实现上在调用map所有方法时，都对整个map进行同步；
++ ConcurrentHashMap的使用锁分段技术，将数据分成一段一段存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一段数据时，其他段的数据也能被其他线程访问。
++ 锁分段技术原理：将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问；	
++ ConcurrentHashMap原理：ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成。Segment是一种可重入锁(ReentrantLock)，HashEntry则用于存储键值对数据。一个ConcurrentHashMap里包含一个Segment数组，Segment的结构和HashMap类似，是一种数组和链表结构，一个Segment里包含一个HashEntry数组，每个HashEntry是一个链表结构的元素，每个Segment守护者一个HashEntry数组里的元素，当对HashEntry数组的数据进行修改时，必须首先获得它对应的Segment锁。ConcurrentHashMap使用分段锁Segment来保护不同段的数据，那么在插入和获取元素的时候，必须先通过哈希算法定位到Segment。
+
+### Hashmap原理。
++ hashCode()与equals()
+    + equels满足条件：自反性、对称性、传递性、一致性
+    + 多次调用hashCode()得到的值应该一样，前提是equals对比的信息无变化、夸程序无须一致。
++ 如何保证Key值唯一
+    + 内部保存一个哈希表，又称散列表，存储key的hash值
++ 存储过程
+    + 通过key的hashCode，在哈希表查到bucketIndex
+    + 检查bucketIndex位置是否已存在元素，不存在直接存储
+    + 已存在元素，通过equals比较key，相同则替换元素
+    + hash值相当，但是equals不同，则也会将元素存在在这个位置，只是新、旧元素通过单链表维护
+
