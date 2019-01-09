@@ -15,20 +15,23 @@
 # in the templates via {{ site.myvariable }}.
 title: 知者减半,省者全无。
 email: yhy_android@sina.cn
-description: >- # this means to ignore newlines until "baseurl:"
-   记录一些琐碎的事情
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+description: 记录一些琐碎的事情
+port: 4000 #端口
+host: 127.0.0.1 #host
+url: "" # 域名地址
+baseurl: "" # 根路径
 # Sidebar settings
 sidebar: true  #添加侧边栏
 sidebar-about-description: "简单的描述一下你自己"
 sidebar-avatar: /img/avatar-liqin.jpg     #你的大头贴，请使用绝对地址.
 
+# 首页显示的文章数量
+# limit_posts: 3
 # Build settings
 markdown: kramdown
 theme: minima
-plugins:
-  - jekyll-feed
+# plugins:
+#   - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

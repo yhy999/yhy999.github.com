@@ -3,8 +3,10 @@ layout:     post
 title:      "广告计费模式"
 date:       2018-05-19
 author:     "Yhyu"
-tags:
-- Life
+category:   
+    - other
+tags:   
+    - other
 ---
 
 ## 1、CPM（按展示付费） 

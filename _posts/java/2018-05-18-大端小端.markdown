@@ -3,8 +3,10 @@ layout:     post
 title:      "大端小端"
 date:       2018-05-18
 author:     "Yhyu"
-tags:
-- Life
+category:   
+    - java
+tags:   
+    - java
 ---
 
 #### 一、定义

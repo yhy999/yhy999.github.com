@@ -3,8 +3,10 @@ layout:     post
 title:      "使用Github Pages"
 date:       2018-11-26
 author:     "Yhyu"
-tags:
-- Life
+category:   
+    - other
+tags:   
+    - other
 ---
 
 #### 第一步：注册账号

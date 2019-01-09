@@ -3,8 +3,10 @@ layout:     post
 title:      "常用加密算法"
 date:       2018-05-17
 author:     "Yhyu"
-tags:
-- Life
+category:   
+    - java
+tags:   
+    - java
 ---
 
 ### 一、对称加密：加解密的密钥相同，加解密速度快且使用长密钥时难以破解。
