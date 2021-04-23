@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: 知者减半,省者全无。
 email: yhy_android@sina.cn
-description: 记录一些琐碎的事情     京ICP备18062530号-1
+description: 京ICP备18062530号-1
 port: 4000 #端口
 host: 127.0.0.1 #host
 url: "" # 域名地址
